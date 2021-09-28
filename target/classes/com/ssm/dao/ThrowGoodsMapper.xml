@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.ThrowGoodsMapper">  
+
+  <select id="getAll" parameterType="throwgoods" resultType="throwgoods">
+  	select * from throwgoods
+  	<trim prefix="where" prefixOverrides="and | or">
+  		<if test="goodname!=null and goodname!=''">goodname like concat('%',#{goodname},'%')</if>
+  	</trim>
+  </select>
+  
+  <update id="approvedManyTg">
+		update throwgoods set clo1="Y",updateed=CURRENT_TIMESTAMP where
+		tgid in(
+		<foreach collection="tgids" item="tgid" separator=",">#{tgid}
+		</foreach>
+		)
+	</update>
+
+	<update id="notapprovedManyTg">
+		update throwgoods set clo1="P",updateed=CURRENT_TIMESTAMP where
+		tgid in(
+		<foreach collection="tgids" item="tgid" separator=",">#{tgid}
+		</foreach>
+		)
+	</update>
+</mapper>

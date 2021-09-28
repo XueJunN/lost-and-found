@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.InformationMapper">
+
+	<select id="getAll" parameterType="information" resultType="information">
+		select * from information
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="username!=null and username!=''">username like concat('%',#{username},'%')</if>
+		</trim>
+	</select>
+
+	<update id="approvedManyInformation">
+		update information set clo1="Y",updateed=CURRENT_TIMESTAMP where
+		infoid in(
+		<foreach collection="infoids" item="infoid" separator=",">#{infoid}
+		</foreach>
+		)
+	</update>
+
+	<update id="notapprovedManyInformation">
+		update information set clo1="P",updateed=CURRENT_TIMESTAMP where
+		infoid in(
+		<foreach collection="infoids" item="infoid" separator=",">#{infoid}
+		</foreach>
+		)
+	</update>
+</mapper>
