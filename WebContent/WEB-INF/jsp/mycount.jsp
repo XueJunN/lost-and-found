@@ -125,7 +125,8 @@
 										<li><a href="toRegisterLogin.do">注册</a></li>
 										<li><a href="toout.do">退出</a></li>
 										<li><a href="tomycountLogin.do">用户中心</a></li>
-										<li><a href="tologout.do?uid=${sessionScope.user.uid}"
+										<li><a
+											href="tologoutLogin.do?uid=${sessionScope.user.uid}"
 											onclick="javascript:return del1()">注销账号</a></li>
 										<li><a href="toadminloginLogin.do">管理员？</a></li>
 									</ul></li>
